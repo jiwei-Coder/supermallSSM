@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+
+       xmlns:tx="http://www.springframework.org/schema/tx"
+
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+
+        http://www.springframework.org/schema/context
+
+        http://www.springframework.org/schema/context/spring-context.xsd
+
+        http://www.springframework.org/schema/aop
+
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+
+        http://www.springframework.org/schema/tx
+
+        http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+    <!-- 扫描基本包 过滤 controller 层 -->
+
+    <context:component-scan base-package="com.mage" >
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+    </context:component-scan>
+
+    <!-- 加载 properties 配置文件 -->
+
+    <context:property-placeholder location="classpath:db.properties" />
+
+    <aop:aspectj-autoproxy /><!-- aop -->
+
+
+    <!-- 配置 c3p0 数据源 -->
+
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+
+        <property name="driverClass" value="${jdbc.driver}"></property>
+
+        <property name="jdbcUrl" value="${jdbc.url}"></property>
+
+        <property name="user" value="${jdbc.username}"></property>
+
+        <property name="password" value="${jdbc.password}"></property>
+
+    </bean>
+
+    <!-- 配置事务管理器 -->
+
+    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+
+    <!-- 设置事物增强 -->
+
+    <tx:advice id="txAdvice" transaction-manager="txManager">
+
+        <tx:attributes>
+            <tx:method name="get*" read-only="true" />
+            <tx:method name="find*" read-only="true" />
+            <tx:method name="query*" read-only="true" />
+            <tx:method name="load*" read-only="true" />
+            <tx:method name="add*" propagation="REQUIRED" />
+            <tx:method name="insert*" propagation="REQUIRED" />
+            <tx:method name="update*" propagation="REQUIRED" />
+            <tx:method name="delete*" propagation="REQUIRED" />
+        </tx:attributes>
+    </tx:advice>
+
+    <!-- aop 切面配置 -->
+
+    <aop:config>
+        <aop:pointcut id="servicePointcut" expression="execution(* com.mage.service..*.*(..))" />
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="servicePointcut" />
+    </aop:config>
+
+    <!-- 配置 sqlSessionFactory -->
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"></property>
+        <property name="configLocation" value="classpath:mybatis.xml" />
+        <property name="mapperLocations" value="classpath:com/mapper/*.xml" />
+    </bean>
+
+    <!-- 配置扫描器 -->
+
+    <bean id="mapperScanner"
+          class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!-- 扫描 com.xxx.dao 这个包以及它的子包下的所有映射接口类 -->
+        <property name="basePackage" value="com.mage.dao" />
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+    </bean>
+</beans>
