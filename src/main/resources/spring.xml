@@ -24,7 +24,7 @@
 
     <!-- 扫描基本包 过滤 controller 层 -->
 
-    <context:component-scan base-package="com.mage" >
+    <context:component-scan base-package="com" >
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
     </context:component-scan>
 
@@ -74,7 +74,7 @@
     <!-- aop 切面配置 -->
 
     <aop:config>
-        <aop:pointcut id="servicePointcut" expression="execution(* com.mage.service..*.*(..))" />
+        <aop:pointcut id="servicePointcut" expression="execution(* com.service..*.*(..))" />
         <aop:advisor advice-ref="txAdvice" pointcut-ref="servicePointcut" />
     </aop:config>
 
@@ -91,7 +91,7 @@
     <bean id="mapperScanner"
           class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <!-- 扫描 com.xxx.dao 这个包以及它的子包下的所有映射接口类 -->
-        <property name="basePackage" value="com.mage.dao" />
+        <property name="basePackage" value="com.dao" />
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
     </bean>
 </beans>

@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <typeAliases>
-        <package name="com.mage.pojo"/>
+        <package name="com.pojo"/>
     </typeAliases>
     <plugins>
         <!-- com.github.pagehelper 为 PageHelper 类所在包名 -->
