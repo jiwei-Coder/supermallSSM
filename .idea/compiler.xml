@@ -7,10 +7,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="ssmdome01" />
+        <module name="supermallSSM" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="ssmdome01" target="1.7" />
+      <module name="supermallSSM" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>
