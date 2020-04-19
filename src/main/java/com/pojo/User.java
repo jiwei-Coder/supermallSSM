@@ -1,19 +1,19 @@
 package com.pojo;
 
 public class User {
-  private Integer user_id;
+  private Integer userId;
   private String nickName;
   private String password;
   private double account;
   private double balance;
   private String tel;
 
-  public Integer getUser_id() {
-    return user_id;
+  public Integer getUserId() {
+    return userId;
   }
 
-  public void setUser_id(Integer user_id) {
-    this.user_id = user_id;
+  public void setUserId(Integer userId) {
+    this.userId = userId;
   }
 
   public String getNickName() {
@@ -59,7 +59,7 @@ public class User {
   @Override
   public String toString() {
     return "User{" +
-            "user_id=" + user_id +
+            "userId=" + userId +
             ", nickName='" + nickName + '\'' +
             ", password='" + password + '\'' +
             ", account=" + account +
