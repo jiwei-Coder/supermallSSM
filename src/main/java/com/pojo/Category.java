@@ -2,8 +2,9 @@ package com.pojo;
 
 public class Category {
     private Integer categoryId;
-    private String title;
+    private String img;
     private String subCategory;
+    private Integer bigCategory;
 
     public Integer getCategoryId() {
         return categoryId;
@@ -13,12 +14,12 @@ public class Category {
         this.categoryId = categoryId;
     }
 
-    public String getTitle() {
-        return title;
+    public String getImg() {
+        return img;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setImg(String img) {
+        this.img = img;
     }
 
     public String getSubCategory() {
@@ -29,12 +30,21 @@ public class Category {
         this.subCategory = subCategory;
     }
 
+    public Integer getBigCategory() {
+        return bigCategory;
+    }
+
+    public void setBigCategory(Integer bigCategory) {
+        this.bigCategory = bigCategory;
+    }
+
     @Override
     public String toString() {
         return "Category{" +
                 "categoryId=" + categoryId +
-                ", title='" + title + '\'' +
+                ", img='" + img + '\'' +
                 ", subCategory='" + subCategory + '\'' +
+                ", bigCategory=" + bigCategory +
                 '}';
     }
 }

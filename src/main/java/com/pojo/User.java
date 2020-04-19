@@ -2,9 +2,9 @@ package com.pojo;
 
 public class User {
   private Integer userId;
+  private String account;
   private String nickName;
   private String password;
-  private double account;
   private double balance;
   private String tel;
 
@@ -14,6 +14,14 @@ public class User {
 
   public void setUserId(Integer userId) {
     this.userId = userId;
+  }
+
+  public String getAccount() {
+    return account;
+  }
+
+  public void setAccount(String account) {
+    this.account = account;
   }
 
   public String getNickName() {
@@ -30,14 +38,6 @@ public class User {
 
   public void setPassword(String password) {
     this.password = password;
-  }
-
-  public double getAccount() {
-    return account;
-  }
-
-  public void setAccount(double account) {
-    this.account = account;
   }
 
   public double getBalance() {
@@ -60,9 +60,9 @@ public class User {
   public String toString() {
     return "User{" +
             "userId=" + userId +
+            ", account='" + account + '\'' +
             ", nickName='" + nickName + '\'' +
             ", password='" + password + '\'' +
-            ", account=" + account +
             ", balance=" + balance +
             ", tel='" + tel + '\'' +
             '}';
