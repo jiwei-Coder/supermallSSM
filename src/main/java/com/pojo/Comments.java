@@ -3,18 +3,18 @@ package com.pojo;
 import java.util.Date;
 
 public class Comments {
-    private Integer userId;
+    private String account;
     private Integer goodsId;
     private Date time;
     private String imgs;
     private String content;
 
-    public Integer getUserId() {
-        return userId;
+    public String getAccount() {
+        return account;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setAccount(String account) {
+        this.account = account;
     }
 
     public Integer getGoodsId() {
@@ -52,7 +52,7 @@ public class Comments {
     @Override
     public String toString() {
         return "Comments{" +
-                "userId=" + userId +
+                "account='" + account + '\'' +
                 ", goodsId=" + goodsId +
                 ", time=" + time +
                 ", imgs='" + imgs + '\'' +

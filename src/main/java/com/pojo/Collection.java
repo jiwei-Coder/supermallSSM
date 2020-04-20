@@ -1,15 +1,15 @@
 package com.pojo;
 
 public class Collection {
-    private Integer userId;
+    private String account;
     private Integer goodsId;
 
-    public Integer getUserId() {
-        return userId;
+    public String getAccount() {
+        return account;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setAccount(String account) {
+        this.account = account;
     }
 
     public Integer getGoodsId() {
@@ -23,7 +23,7 @@ public class Collection {
     @Override
     public String toString() {
         return "Collection{" +
-                "userId=" + userId +
+                "account='" + account + '\'' +
                 ", goodsId=" + goodsId +
                 '}';
     }

@@ -1,16 +1,16 @@
 package com.pojo;
 
 public class Cart {
-    private Integer userId;
+    private String account;
     private Integer goodsId;
     private Integer num;
 
-    public Integer getUserId() {
-        return userId;
+    public String getAccount() {
+        return account;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setAccount(String account) {
+        this.account = account;
     }
 
     public Integer getGoodsId() {
@@ -32,7 +32,7 @@ public class Cart {
     @Override
     public String toString() {
         return "Cart{" +
-                "userId=" + userId +
+                "account='" + account + '\'' +
                 ", goodsId=" + goodsId +
                 ", num=" + num +
                 '}';
