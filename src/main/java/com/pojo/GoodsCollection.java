@@ -1,6 +1,6 @@
 package com.pojo;
 
-public class Collection {
+public class GoodsCollection {
     private String account;
     private Integer goodsId;
 
