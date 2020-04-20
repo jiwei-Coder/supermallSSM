@@ -3,8 +3,8 @@ package com.pojo;
 public class Category {
     private Integer categoryId;
     private String img;
-    private String subCategory;
-    private Integer bigCategory;
+    private String category;
+    private Integer bigCategoryId;
 
     public Integer getCategoryId() {
         return categoryId;
@@ -22,20 +22,20 @@ public class Category {
         this.img = img;
     }
 
-    public String getSubCategory() {
-        return subCategory;
+    public String getCategory() {
+        return category;
     }
 
-    public void setSubCategory(String subCategory) {
-        this.subCategory = subCategory;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
-    public Integer getBigCategory() {
-        return bigCategory;
+    public Integer getBigCategoryId() {
+        return bigCategoryId;
     }
 
-    public void setBigCategory(Integer bigCategory) {
-        this.bigCategory = bigCategory;
+    public void setBigCategoryId(Integer bigCategoryId) {
+        this.bigCategoryId = bigCategoryId;
     }
 
     @Override
@@ -43,8 +43,8 @@ public class Category {
         return "Category{" +
                 "categoryId=" + categoryId +
                 ", img='" + img + '\'' +
-                ", subCategory='" + subCategory + '\'' +
-                ", bigCategory=" + bigCategory +
+                ", category='" + category + '\'' +
+                ", bigCategoryId=" + bigCategoryId +
                 '}';
     }
 }
