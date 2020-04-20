@@ -1,5 +1,6 @@
 package com.controller;
 
+import com.pojo.Category;
 import com.pojo.Goods;
 
 import java.util.List;
@@ -20,7 +21,7 @@ public interface HomeController {
      * 获取当前最热门的四个商品类型（二级分类）
      * @return
      */
-    List<Goods> recommendtype();
+    List<Category> recommendtype();
 
     /**
      *
