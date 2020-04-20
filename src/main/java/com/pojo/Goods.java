@@ -9,7 +9,7 @@ public class Goods {
     private String imgs;
     private String showimg;
     private String priceInterval;
-    private String categoryId;
+    private Category category;
 
     public Integer getGoodsId() {
         return goodsId;
@@ -75,12 +75,12 @@ public class Goods {
         this.priceInterval = priceInterval;
     }
 
-    public String getCategoryId() {
-        return categoryId;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCategoryId(String categoryId) {
-        this.categoryId = categoryId;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     @Override
@@ -94,7 +94,7 @@ public class Goods {
                 ", imgs='" + imgs + '\'' +
                 ", showimg='" + showimg + '\'' +
                 ", priceInterval='" + priceInterval + '\'' +
-                ", categoryId='" + categoryId + '\'' +
+                ", category=" + category +
                 '}';
     }
 }
