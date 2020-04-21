@@ -14,11 +14,12 @@
         <result column="imgs" property="imgs"/>
         <result column="showimg" property="showimg"/>
         <result column="priceInterval" property="priceInterval"/>
+        <result column="tips" property="tips"/>
         <collection column="category_id" property="category" select="selectCategoryById"/>
     </resultMap>
 
     <select id="selectGoodsById" parameterType="Integer" resultMap="baseGoods_one_to_one">
-        SELECT goods_id goodsId, name, title, price, reallyPrice, imgs, showimg, priceInterval, category_id
+        SELECT goods_id goodsId, name, title, price, reallyPrice, imgs, showimg, priceInterval, category_id, tips
         FROM goods
         WHERE goods_id = #{id}
     </select>
@@ -60,7 +61,7 @@
 
     <!--根据商品二级类别查询其他商品-->
     <select id="selectRecommentsByCategoryId" parameterType="Integer" resultMap="baseGoods_one_to_one">
-        SELECT goods_id, name, title, price, reallyPrice, imgs, showimg, priceInterval, category_id
+        SELECT goods_id, name, title, price, reallyPrice, imgs, showimg, priceInterval, category_id, tips
         FROM goods
         WHERE category_id = #{id}
         LIMIT 2,4;
