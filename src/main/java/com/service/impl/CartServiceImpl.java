@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -31,12 +32,17 @@ public class CartServiceImpl implements CartService {
     public boolean checkout(Map searchMap) {
         String account = (String) searchMap.get("account");
         double totalmoney = (Double) searchMap.get("totalmoney");
-        List<Cart> buyGoodsList = (List<Cart>) searchMap.get("buyGoodList");
-        for (Cart cart : buyGoodsList) {
+        List<Map> buyGoodsList = (List<Map>) searchMap.get("buyGoodList");
+        List<Cart> cartList = new ArrayList<>();
+        for (Map map : buyGoodsList) {
+            Cart cart = new Cart();
+            cart.setNum((Integer) map.get("num"));
+            cart.setGoodsId((Integer) map.get("goodsId"));
             cart.setAccount(account);
+            cartList.add(cart);
         }
         try{
-            cartDao.checkout(buyGoodsList);
+            cartDao.checkout(cartList);
             cartDao.payFotGoods(account,totalmoney);
         }catch (Exception e){
             log.error(e);

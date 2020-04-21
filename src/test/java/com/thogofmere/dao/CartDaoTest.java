@@ -21,7 +21,8 @@ public class CartDaoTest {
 
     @Test
     public void testFindCartByUserAccount(){
-        List<CartVo> cartByUserAccount = cartDao.findCartByUserAccount("jack");
+        List<CartVo> cartByUserAccount = cartDao.findCartByUserAccount("123");
+        System.out.println(cartByUserAccount.size());
         System.out.println(cartByUserAccount);
     }
 
@@ -43,6 +44,11 @@ public class CartDaoTest {
         //System.out.println(checkout);
         List<CartVo> cartByUserAccount = cartDao.findCartByUserAccount("jack");
         System.out.println(cartByUserAccount);
+    }
+
+    @Test
+    public  void testPay(){
+        cartDao.payFotGoods("123",100);
     }
 
 }

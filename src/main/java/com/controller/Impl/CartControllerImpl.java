@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -36,7 +37,9 @@ public class CartControllerImpl implements CartController {
                 account = cookie.getValue();
             }
         }
-
+        if (account==null||account.equals("")){
+            return new ArrayList<CartVo>();
+        }
         List<CartVo> goodsList = cartService.getCartByUserAccount(account);
         return goodsList;
     }

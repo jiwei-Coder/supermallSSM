@@ -5,8 +5,7 @@
 <mapper namespace="com.dao.CartDao">
     <resultMap id="CartVo_one_to_one" type="CartVo">
         <result column="num" property="num"/>
-        <collection column="goods_id" property="goods" resultMap="baseGoods_one_to_one"/>
-
+        <collection column="goods_id" property="goods" select="selectGoodsById"/>
     </resultMap>
 
     <resultMap id="baseGoods_one_to_one" type="Goods">
@@ -22,6 +21,13 @@
         <collection column="category_id" property="category" select="selectCategoryById"/>
     </resultMap>
 
+    <select id="selectGoodsById" parameterType="Integer" resultType="Goods">
+        SELECT goods.goods_id, name, title, price, reallyPrice, imgs,
+        showimg, priceInterval, category_id, tips
+        FROM goods
+        WHERE goods_id = #{goods_id}
+    </select>
+
     <select id="selectCategoryById" parameterType="Integer" resultType="Category">
         SELECT category_id categoryId, img, category, bigCategory_id bigCategoryId
         FROM category
@@ -34,7 +40,7 @@
         showimg, priceInterval, category_id, tips,t.num
         from ( select * from cart where user_id = (
             SELECT u.user_id from `user` u WHERE u.account = #{account}
-        ) ) t ,goods where t.goods_id = goods.goods_id
+        ) and num >0  ) t ,goods where t.goods_id = goods.goods_id
     </select>
 
     <!--结算用户购物车-->
