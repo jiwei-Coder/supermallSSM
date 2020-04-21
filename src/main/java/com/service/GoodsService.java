@@ -13,4 +13,5 @@ public interface GoodsService {
     Boolean checkInCollection(String account, Integer id);
     List<Comments> selectCommentsByGoodsId(Integer id);
     List<Goods> selectRecommentsByCategoryId(Integer id);
+    Boolean cancelCollection(String account, Integer id);
 }

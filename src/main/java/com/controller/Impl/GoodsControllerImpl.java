@@ -41,6 +41,13 @@ public class GoodsControllerImpl implements GoodsController{
         return goodsServiceImpl.addInCollection(account, id);
     }
 
+    @RequestMapping(value = "/cancelcollection", method = RequestMethod.GET)
+    @ResponseBody
+    @CrossOrigin
+    public Boolean cancelCollection(String account, Integer id){
+        return goodsServiceImpl.cancelCollection(account, id);
+    }
+
     @RequestMapping(value = "/iscollection", method = RequestMethod.GET)
     @ResponseBody
     @CrossOrigin

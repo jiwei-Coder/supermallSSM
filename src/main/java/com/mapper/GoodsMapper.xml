@@ -30,6 +30,22 @@
         WHERE category_id = #{category_id}
     </select>
 
+    <!--查询是否在购物车中-->
+    <select id="checkInCart" resultType="Cart">
+        SELECT account, goods_id, num
+        FROM cart
+        WHERE account = #{account}
+        AND goods_id = #{id}
+    </select>
+
+    <!--更新购物车（已存在项）-->
+    <update id="updateCart" >
+        UPDATE cart
+        SET num = #{num}
+        WHERE account = #{account}
+        AND goods_id = #{id}
+    </update>
+
     <!--将商品添加进购物车-->
     <insert id="addInCart" >
         INSERT
@@ -43,6 +59,14 @@
         INTO collection
         VALUES(#{account},#{id})
     </insert>
+
+    <!--取消收藏-->
+    <delete id="removeFromCollection" >
+        DELETE
+        FROM collection
+        WHERE account = #{account}
+        AND goods_id = #{id}
+    </delete>
 
     <!--查询是否收藏-->
     <select id="checkInCollection" resultType="GoodsCollection">
