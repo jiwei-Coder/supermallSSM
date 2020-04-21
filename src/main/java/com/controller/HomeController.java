@@ -4,6 +4,7 @@ import com.pojo.Category;
 import com.pojo.Goods;
 
 import java.util.List;
+import java.util.Map;
 
 public interface HomeController {
 
@@ -28,10 +29,9 @@ public interface HomeController {
      * get  /home/data
      * 根据tip和页数获取首页商品数据（页数用于下拉加载更多）
      * 根据tip和页数获取一页（30个）商品数据
-     * @param type
-     * @param page
+     * @param searchMap
      * @return
      */
-    List<Goods> loadData(String type,Integer page);
+    List<Goods> loadData(Map searchMap);
 
 }

@@ -98,4 +98,5 @@
             </props>
         </property>
     </bean>-->
+    <bean class="com.config.SwaggerConfig"/>
 </beans>

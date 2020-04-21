@@ -3,5 +3,49 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dao.CartDao">
+    <resultMap id="CartVo_one_to_one" type="CartVo">
+        <result column="num" property="num"/>
+        <collection column="goods_id" property="goods" resultMap="baseGoods_one_to_one"/>
+
+    </resultMap>
+
+    <resultMap id="baseGoods_one_to_one" type="Goods">
+        <id column="goods_id" property="goodsId"/>
+        <result column="name" property="name"/>
+        <result column="title" property="title"/>
+        <result column="price" property="price"/>
+        <result column="reallyPrice" property="reallyPrice"/>
+        <result column="imgs" property="imgs"/>
+        <result column="showimg" property="showimg"/>
+        <result column="priceInterval" property="priceInterval"/>
+        <result column="tips" property="tips"/>
+        <collection column="category_id" property="category" select="selectCategoryById"/>
+    </resultMap>
+
+    <select id="selectCategoryById" parameterType="Integer" resultType="Category">
+        SELECT category_id categoryId, img, category, bigCategory_id bigCategoryId
+        FROM category
+        WHERE category_id = #{category_id}
+    </select>
+
+    <!--查询账户购物车数据-->
+    <select id="findCartByUserAccount" parameterType="java.lang.String" resultMap="CartVo_one_to_one">
+       select goods.goods_id, name, title, price, reallyPrice, imgs,
+        showimg, priceInterval, category_id, tips,t.num
+        from ( select * from cart where user_id = (
+            SELECT u.user_id from `user` u WHERE u.account = #{account}
+        ) ) t ,goods where t.goods_id = goods.goods_id
+    </select>
+
+    <!--结算用户购物车-->
+    <select id="checkout" parameterType="list">
+        <foreach collection="list" item="cart">
+            update cart set num = num -#{cart.num} where  goods_id = #{cart.goodsId} and user_id = (select u.user_id from `user` u WHERE account =  #{cart.account});
+        </foreach>
+    </select>
+
+    <select id="payFotGoods" resultMap="CartVo_one_to_one">
+       update `user` set balance = balance -#{totalmoney} where account=#{account}
+    </select>
 
 </mapper>

@@ -3,24 +3,30 @@ package com.controller.Impl;
 import com.controller.HomeController;
 import com.pojo.Category;
 import com.pojo.Goods;
+import com.service.HomeService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
+
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/home")
 @CrossOrigin
+@Api(description = "首页接口")
 public class HomeControllerImpl implements HomeController {
 
+    @Autowired
+    private HomeService homeService;
+
     @GetMapping("/login")
-    public void Login(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse){
+    public void Login(HttpServletResponse httpServletResponse){
         Cookie cookie = new Cookie("name","琛天皇");
         cookie.setPath("/");
         cookie.setMaxAge(60*10);
@@ -28,41 +34,26 @@ public class HomeControllerImpl implements HomeController {
     }
 
     @GetMapping("/swipe")
+    @ApiOperation(value = "加载轮播图接口", notes = "加载轮播图接口" , httpMethod = "GET")
     public List<Goods> swiperList(){
-        List<Goods> goodsList = new ArrayList<Goods>();
-        for (int i = 0; i < 3 ; i++) {
-            Goods goods = new Goods();
-            goods.setGoodsId(i);
-            goods.setName("买者必死"+i);
-            goods.setPrice(1000000000000.0+i);
-            goodsList.add(goods);
-        }
+        List<Goods> goodsList = homeService.getSwiperData();
         return goodsList;
     }
 
     @GetMapping("/recommendtype")
+    @ApiOperation(value = "加载推荐类接口", notes = "加载推荐类接口" , httpMethod = "GET")
     public List<Category> recommendtype() {
 
-        List<Category> categories = new ArrayList<Category>();
-        for (int i = 0; i < 3 ; i++) {
-            Category category = new Category();
-            category.setBigCategoryId(i);
-            category.setCategory("假货"+i);
-            categories.add(category);
-        }
+        List<Category> categories = homeService.getRecommendType();
         return categories;
     }
 
     @PostMapping("/data")
-    public List<Goods> loadData(@RequestBody String type, @RequestBody Integer page) {
-        List<Goods> goodsList = new ArrayList<Goods>();
-        for (int i = 0; i < 3 ; i++) {
-            Goods goods = new Goods();
-            goods.setGoodsId(page);
-            goods.setName(type);
-            goods.setPrice(1000000000000.0+i);
-            goodsList.add(goods);
-        }
+    @ApiOperation(value = "根据tip和页数获取一页（30个）商品数据", notes = "根据tip和页数获取首页商品数据" , httpMethod = "POST")
+    public List<Goods> loadData(@RequestBody Map searchMap) {
+        List<Goods> goodsList = homeService.loadData(searchMap);
+        System.out.println("type:"+searchMap.get("type"));
+        System.out.println("page:"+searchMap.get("page"));
         return goodsList;
     }
 }

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.HomeDao">
+
+    <resultMap id="baseGoods_one_to_one" type="Goods">
+        <id column="goods_id" property="goodsId"/>
+        <result column="name" property="name"/>
+        <result column="title" property="title"/>
+        <result column="price" property="price"/>
+        <result column="reallyPrice" property="reallyPrice"/>
+        <result column="imgs" property="imgs"/>
+        <result column="showimg" property="showimg"/>
+        <result column="priceInterval" property="priceInterval"/>
+        <result column="tips" property="tips"/>
+        <collection column="category_id" property="category" select="selectCategoryById"/>
+    </resultMap>
+
+    <resultMap id="baseCategory" type="Category">
+        <id column="category_id" property="categoryId"/>
+        <result column="img" property="img"/>
+        <result column="category" property="category"/>
+        <result column="bigCategory_id" property="bigCategoryId"/>
+    </resultMap>
+
+    <select id="selectCategoryById" parameterType="Integer" resultType="Category">
+        SELECT category_id categoryId, img, category, bigCategory_id bigCategoryId
+        FROM category
+        WHERE category_id = #{category_id}
+    </select>
+    <!--查询前四件热门商品-->
+    <select id="findHotGoods" resultMap="baseGoods_one_to_one">
+       SELECT goods_id, name, title, price, reallyPrice, imgs, showimg, priceInterval, category_id, tips
+       FROM goods WHERE goods_id IN (
+         SELECT goods_id FROM (
+           SELECT goods_id,collectionNum FROM (
+             SELECT go.goods_id , COUNT(go.goods_id) AS "collectionNum"
+             FROM collection col LEFT JOIN goods go ON go.goods_id = col.goods_id
+             GROUP BY goods_id
+              ORDER BY collectionNum DESC) t LIMIT 0,4
+          ) tt
+        )
+    </select>
+
+    <!--根据类型分页查询-->
+    <select id="findGoodsByTip" parameterType="java.lang.String"  resultMap="baseGoods_one_to_one">
+        SELECT goods_id, name, title, price, reallyPrice, imgs, showimg, priceInterval, category_id, tips
+        from goods where tips=#{tip}
+    </select>
+
+    <!--查询推荐类型-->
+    <select id="findRecommendType" resultMap="baseCategory">
+        select category_id,img,category,bigCategory_id from category where category_id in (
+            select category_id  from (select go.category_id, COUNT(go.category_id) as 'num'
+            from goods go LEFT JOIN category cat on cat.category_id = go.category_id where tips = '精选' and cat.bigCategory_id !=0
+            GROUP BY go.category_id
+            order by num desc
+        LIMIT 0,4) t)
+    </select>
+</mapper>
