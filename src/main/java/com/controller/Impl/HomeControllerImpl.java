@@ -5,6 +5,7 @@ import com.pojo.Category;
 import com.pojo.Goods;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -19,15 +20,11 @@ import java.util.List;
 public class HomeControllerImpl implements HomeController {
 
     @GetMapping("/login")
-    public List<String> Login(HttpServletRequest httpServletRequest,HttpServletResponse httpServletResponse){
+    public void Login(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse){
         Cookie cookie = new Cookie("name","琛天皇");
         cookie.setPath("/");
         cookie.setMaxAge(60*10);
         httpServletResponse.addCookie(cookie);
-        List<String> names = new ArrayList<String>();
-        names.add("皇帝");
-        names.add("琛姆斯");
-        return names;
     }
 
     @GetMapping("/swipe")
@@ -56,7 +53,7 @@ public class HomeControllerImpl implements HomeController {
         return categories;
     }
 
-    @GetMapping("/data")
+    @PostMapping("/data")
     public List<Goods> loadData(@RequestBody String type, @RequestBody Integer page) {
         List<Goods> goodsList = new ArrayList<Goods>();
         for (int i = 0; i < 3 ; i++) {

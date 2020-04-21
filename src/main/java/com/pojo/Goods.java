@@ -10,6 +10,15 @@ public class Goods {
     private String showimg;
     private String priceInterval;
     private Category category;
+    private String tips;
+
+    public String getTips() {
+        return tips;
+    }
+
+    public void setTips(String tips) {
+        this.tips = tips;
+    }
 
     public Integer getGoodsId() {
         return goodsId;
@@ -95,6 +104,7 @@ public class Goods {
                 ", showimg='" + showimg + '\'' +
                 ", priceInterval='" + priceInterval + '\'' +
                 ", category=" + category +
+                ", tips='" + tips + '\'' +
                 '}';
     }
 }

@@ -41,7 +41,7 @@ public class CartControllerImpl implements CartController {
         return goodsList;
     }
 
-    @GetMapping("/checkout")
+    @PostMapping("/checkout")
     public Map<String, Object> checkout(@PathVariable String account ,@PathVariable double totalmoney) {
         Map<String,Object> map = new HashMap<String, Object>();
 
