@@ -27,7 +27,7 @@ public class HomeControllerImpl implements HomeController {
 
     @GetMapping("/login")
     public void Login(HttpServletResponse httpServletResponse){
-        Cookie cookie = new Cookie("name","琛天皇");
+        Cookie cookie = new Cookie("name","123");
         cookie.setPath("/");
         cookie.setMaxAge(60*10);
         httpServletResponse.addCookie(cookie);
