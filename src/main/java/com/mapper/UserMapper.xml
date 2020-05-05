@@ -3,5 +3,13 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dao.UserDao">
+    <select id="login" resultType="User">
+        SELECT * FROM `user`
+        WHERE account=#{account} AND `password`=#{password}
+    </select>
 
+    <insert id="register">
+        INSERT INTO `user`(account,nickName,password,balance,tel)
+        VALUES(#{account},#{nickName},#{password},1000,#{tel})
+    </insert>
 </mapper>

@@ -3,5 +3,13 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dao.CategoryDao">
+    <select id="getAllTopCategory" resultType="Category">
+       SELECT category_id AS categoryId,img,category,bigCategory_id AS bigCategoryId FROM category
+       WHERE bigCategory_id=0
+    </select>
 
+    <select id="getSubCategoryById" resultType="Category" parameterType="Integer">
+        SELECT category_id AS categoryId,img,category,bigCategory_id AS bigCategoryId FROM category
+        WHERE bigCategory_id=#{id}
+    </select>
 </mapper>
