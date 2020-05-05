@@ -22,7 +22,7 @@
     </resultMap>
 
     <select id="selectGoodsById" parameterType="Integer" resultType="Goods">
-        SELECT goods.goods_id, name, title, price, reallyPrice, imgs,
+        SELECT goods_id goodsId, name, title, price, reallyPrice, imgs,
         showimg, priceInterval, category_id, tips
         FROM goods
         WHERE goods_id = #{goods_id}

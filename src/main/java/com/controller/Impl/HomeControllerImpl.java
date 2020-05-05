@@ -25,13 +25,13 @@ public class HomeControllerImpl implements HomeController {
     @Autowired
     private HomeService homeService;
 
-//    @GetMapping("/login")
-//    public void Login(HttpServletResponse httpServletResponse){
-//        Cookie cookie = new Cookie("name","123");
-//        cookie.setPath("/");
-//        cookie.setMaxAge(60*10);
-//        httpServletResponse.addCookie(cookie);
-//    }
+    @GetMapping("/login")
+    public void Login(HttpServletResponse httpServletResponse){
+        Cookie cookie = new Cookie("name","123");
+        cookie.setPath("/");
+        cookie.setMaxAge(60*10);
+        httpServletResponse.addCookie(cookie);
+    }
 
     @GetMapping("/swipe")
     @ApiOperation(value = "加载轮播图接口", notes = "加载轮播图接口" , httpMethod = "GET")
