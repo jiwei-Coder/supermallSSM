@@ -2,18 +2,23 @@
 <project version="4">
   <component name="dataSourceStorageLocal">
     <data-source name="db_shopping@localhost" uuid="d760ade0-e636-4ef7-84b2-5b1d91f2cd09">
-      <database-info product="MySQL" version="5.6.21-log" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.33 ( Revision: alexander.soklakov@oracle.com-20140908134200-8ukofe1izi0r2b63 )" family="MYSQL" exact-version="5.6.21">
+      <database-info product="MySQL" version="5.6.21-log" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.33 ( Revision: alexander.soklakov@oracle.com-20140908134200-8ukofe1izi0r2b63 )" dbms="MYSQL" exact-version="5.6.21">
         <extra-name-characters>#@</extra-name-characters>
         <identifier-quote-string>`</identifier-quote-string>
       </database-info>
       <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower" />
       <secret-storage>master_key</secret-storage>
       <user-name>YLS</user-name>
-      <introspection-schemas>*:db_shopping</introspection-schemas>
+      <schema-mapping>
+        <introspection-scope>
+          <node kind="schema" qname="db_shopping" />
+        </introspection-scope>
+      </schema-mapping>
     </data-source>
     <data-source name="@localhost" uuid="b1f2d607-0302-4208-b2da-027731f58efd">
-      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" family="MYSQL" exact-version="0.0" />
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="MYSQL" exact-version="0.0" />
       <secret-storage>master_key</secret-storage>
+      <schema-mapping />
     </data-source>
   </component>
 </project>
