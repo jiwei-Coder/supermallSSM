@@ -78,7 +78,7 @@
 
     <!--根据商品id查询商品评价-->
     <select id="selectCommentsByGoodsId" parameterType="Integer" resultType="Comments">
-        SELECT account, goods_id, time, imgs, content
+        SELECT account, goods_id goodsId, time, imgs, content
         FROM comments
         WHERE goods_id = #{id}
     </select>
